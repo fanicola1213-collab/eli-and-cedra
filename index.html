@@ -269,10 +269,9 @@ const CONFIG = {
   rsvpDeadline: "June 1, 2027",
   maxPartySize: 4,
   meals: ["Beef", "Chicken", "Fish", "Vegetarian", "Children's meal"],
-  registry: [
-    { label: "Registry one", url: "https://www.zola.com/" },
-    { label: "Honeymoon fund", url: "#" }
-  ],
+  // Add one line per registry or fund, e.g. { label: "Honeymoon fund", url: "https://..." }
+  // Leave the list empty to show "Registry details coming soon."
+  registry: [],
   faq: [
     { q: "What should I wear?", a: "Dress code to come. Garden or cocktail attire is typical for a summer evening here." },
     { q: "Are children invited?", a: "We'll update this once the guest list is final." },
@@ -305,8 +304,10 @@ $("venueAddr").textContent = CONFIG.venueAddress;
 $("mapLink").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.venueName + ", " + CONFIG.venueAddress);
 $("hotelText").textContent = CONFIG.hotels;
 $("rsvpBy").textContent = "Kindly reply by " + CONFIG.rsvpDeadline;
-$("regBtns").innerHTML = CONFIG.registry.map(r =>
-  `<a class="btn ghost" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">${esc(r.label)}</a>`).join("");
+const regs = CONFIG.registry.filter(r => /^https:\/\//.test(r.url));
+$("regBtns").innerHTML = regs.length
+  ? regs.map(r => `<a class="btn ghost" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.label)}</a>`).join("")
+  : `<p style="color:var(--soft);margin:0">Registry details coming soon.</p>`;
 $("faqList").innerHTML = CONFIG.faq.map(f => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
 $("f-count").innerHTML = Array.from({length: CONFIG.maxPartySize}, (_, i) => `<option>${i + 1}</option>`).join("");
 $("f-meal").innerHTML = CONFIG.meals.map(m => `<option>${esc(m)}</option>`).join("");
