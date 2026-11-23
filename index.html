@@ -87,6 +87,7 @@ legend{font-size:15px;font-weight:500;margin-bottom:6px}
 details{border-bottom:1px solid var(--line);padding:6px 0}
 summary{cursor:pointer;font-family:Cormorant,serif;font-size:23px;font-weight:600;padding:12px 0;min-height:44px;list-style-position:outside}
 details p{color:var(--soft)}
+.help{font-size:14px;color:var(--soft);margin:0;text-align:center}.help a{overflow-wrap:anywhere}
 .note{font-size:13px;color:var(--soft);text-align:center;margin-top:16px}
 footer{text-align:center;padding:48px 16px 64px;background:var(--acacia);color:var(--bg)}
 footer .names{font-size:clamp(40px,7vw,64px)}
@@ -217,6 +218,7 @@ footer .names{font-size:clamp(40px,7vw,64px)}
       <label>A note for the couple<textarea id="f-note" name="note"></textarea></label>
       <p class="err" id="formErr" role="alert"></p>
       <button class="btn" type="submit" id="submitBtn">Send RSVP</button>
+      <p class="help" id="rsvpHelp"></p>
     </form>
     <div class="msg" id="thanks" hidden tabindex="-1"></div>
   </div>
@@ -230,7 +232,7 @@ footer .names{font-size:clamp(40px,7vw,64px)}
 
 <section class="band" id="faq"><div class="wrap">
   <h2>Questions</h2>
-  <p class="lead">Can't find an answer? Reach out to us anytime.</p>
+  <p class="lead" id="faqLead">Can't find an answer? Reach out to us anytime.</p>
   <div class="card" id="faqList"></div>
   <p class="note">Names, story, times and answers on this page are placeholders until the couple fills them in.</p>
 </div></section>
@@ -267,6 +269,7 @@ const CONFIG = {
   ],
   hotels: "We're arranging hotel room blocks and will post the details and booking links here.",
   rsvpDeadline: "June 1, 2027",
+  contactEmail: "cedraraffo13@gmail.com",   // shown under the RSVP form and in Questions
   maxPartySize: 4,
   meals: ["Beef", "Chicken", "Fish", "Vegetarian", "Children's meal"],
   // Add one line per registry or fund, e.g. { label: "Honeymoon fund", url: "https://..." }
@@ -312,6 +315,14 @@ $("faqList").innerHTML = CONFIG.faq.map(f => `<details><summary>${esc(f.q)}</sum
 $("f-count").innerHTML = Array.from({length: CONFIG.maxPartySize}, (_, i) => `<option>${i + 1}</option>`).join("");
 $("f-meal").innerHTML = CONFIG.meals.map(m => `<option>${esc(m)}</option>`).join("");
 
+// Contact email
+const mail = CONFIG.contactEmail;
+const mailLink = () => { const a = document.createElement("a"); a.href = "mailto:" + mail; a.textContent = mail; return a; };
+if (mail) {
+  const h = $("rsvpHelp"); h.append("Trouble submitting? Email ", mailLink(), " and we'll add you.");
+  const f = $("faqLead"); f.textContent = "Can't find an answer? Email "; f.append(mailLink(), ".");
+}
+
 // Countdown
 const target = new Date(CONFIG.dateISO).getTime();
 const tick = () => {
@@ -342,7 +353,7 @@ form.addEventListener("submit", async e => {
       await fetch(CONFIG.rsvpEndpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(data) });
       sent = true;
     } catch (x) {
-      err.textContent = "Something went wrong sending your RSVP. Please try again in a moment.";
+      err.textContent = "Something went wrong sending your RSVP. Please try again, or email " + (mail || "us") + ".";
       btn.disabled = false; btn.textContent = "Send RSVP"; return;
     }
   }
