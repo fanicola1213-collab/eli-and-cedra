@@ -40,7 +40,7 @@ p{margin:0 0 12px}
 a{color:var(--acacia)}
 .hero{display:flex;flex-direction:column;text-align:center;color:var(--heroInk);overflow:hidden;background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 70%,var(--sky3) 100%)}
 .hero-text{padding:clamp(40px,8vh,96px) 20px clamp(8px,2vh,24px)}
-.scene{display:block;width:100%;height:clamp(220px,36vw,440px);flex:none}
+.scene{display:block;width:100%;height:clamp(240px,34vw,460px);flex:none;overflow:visible}
 .kicker{font-size:15px;letter-spacing:.02em;margin-bottom:10px}
 .names{font-family:Cormorant,Georgia,serif;line-height:1.05;font-size:clamp(52px,10vw,104px);font-weight:500;font-style:italic}
 .when{font-family:Cormorant,serif;font-size:clamp(24px,3.4vw,32px);margin-top:14px}
@@ -105,7 +105,7 @@ footer .names{font-size:clamp(40px,7vw,64px)}
     <div class="where" id="where"></div>
     <div class="count" id="count" aria-live="off"></div>
   </div>
-  <svg class="scene" viewBox="0 380 1440 440" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <svg class="scene" viewBox="0 380 1440 440" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
     <defs>
       <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="var(--sky1)"/><stop offset=".62" stop-color="var(--sky2)"/><stop offset="1" stop-color="var(--sky3)"/>
@@ -128,14 +128,14 @@ footer .names{font-size:clamp(40px,7vw,64px)}
       </g>
     </defs>
         <g class="sunrise"><circle cx="720" cy="610" r="165" fill="url(#glow)"/><circle cx="720" cy="610" r="96" fill="var(--sun)"/></g>
-    <path d="M0 640 Q240 590 480 625 T960 615 T1440 630 V820 H0Z" fill="var(--hill)"/>
+    <path d="M-3000 640 H0 Q240 590 480 625 T960 615 T1440 630 H4440 V820 H-3000Z" fill="var(--hill)"/>
     <use href="#acacia" transform="translate(190 690) scale(1.25)"/>
     <use href="#acacia" transform="translate(1250 680) scale(1.05)"/>
     <use href="#acacia" transform="translate(1010 640) scale(.55)"/>
     <use href="#giraffe" transform="translate(600 720) scale(.95)"/>
     <use href="#giraffe" transform="translate(840 720) scale(-.95 .95)"/>
-    <path d="M0 700 Q360 670 720 700 T1440 695 V820 H0Z" fill="var(--hill2)"/>
-    <path d="M0 760 Q400 735 800 758 T1440 750 V820 H0Z" fill="var(--sil)"/>
+    <path d="M-3000 700 H0 Q360 670 720 700 T1440 695 H4440 V820 H-3000Z" fill="var(--hill2)"/>
+    <path d="M-3000 760 H0 Q400 735 800 758 T1440 750 H4440 V820 H-3000Z" fill="var(--sil)"/>
   </svg>
 </header>
 
@@ -322,6 +322,11 @@ if (mail) {
   const h = $("rsvpHelp"); h.append("Trouble submitting? Email ", mailLink(), " and we'll add you.");
   const f = $("faqLead"); f.textContent = "Can't find an answer? Email "; f.append(mailLink(), ".");
 }
+
+// Scene: zoom to fill on narrow screens (crops only the sides); show the whole scene on wide ones (never crops the giraffes).
+const scene = document.querySelector(".scene");
+const fit = () => { const r = scene.getBoundingClientRect(); scene.setAttribute("preserveAspectRatio", r.width / r.height <= 1440 / 440 ? "xMidYMax slice" : "xMidYMax meet"); };
+fit(); const sceneObs = new ResizeObserver(fit); sceneObs.observe(scene);
 
 // Countdown
 const target = new Date(CONFIG.dateISO).getTime();
