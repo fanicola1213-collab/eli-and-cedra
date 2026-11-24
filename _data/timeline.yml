@@ -1,0 +1,14 @@
+# Our story timeline. Each entry starts with "- when:". Add new ones at the bottom.
+# Keep the spacing exactly as shown. Text inside quotes can be anything.
+
+- when: "Year"
+  title: "Where it began"
+  text: "Write a sentence or two about how you met."
+
+- when: "Year"
+  title: "Our first adventure"
+  text: "A trip, a first date, a moment you both remember."
+
+- when: "Year"
+  title: "The proposal"
+  text: "Where, how, and who cried first."

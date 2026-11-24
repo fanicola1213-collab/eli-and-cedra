@@ -1,0 +1,29 @@
+<svg class="scene" viewBox="0 380 1440 440" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <defs>
+    <radialGradient id="glow"><stop offset="0" stop-color="var(--sun)" stop-opacity=".9"/><stop offset="1" stop-color="var(--sun)" stop-opacity="0"/></radialGradient>
+    <g id="acacia">
+      <path d="M-6 0 L-3 -70 Q-30 -95 -60 -100 M3 -70 Q30 -96 62 -104 M0 -70 L2 -110" stroke="var(--sil)" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <ellipse cx="0" cy="-118" rx="120" ry="20" fill="var(--sil)"/>
+      <ellipse cx="-50" cy="-104" rx="62" ry="13" fill="var(--sil)"/>
+      <ellipse cx="55" cy="-108" rx="66" ry="14" fill="var(--sil)"/>
+    </g>
+    <g id="giraffe" fill="var(--sil)">
+      <ellipse cx="0" cy="-118" rx="46" ry="26"/>
+      <rect x="-36" y="-108" width="8" height="108" rx="3"/><rect x="-20" y="-104" width="8" height="104" rx="3"/>
+      <rect x="20" y="-104" width="8" height="104" rx="3"/><rect x="34" y="-108" width="8" height="108" rx="3"/>
+      <path d="M30 -130 Q58 -200 70 -262 L86 -258 Q74 -196 50 -112 Z"/>
+      <path d="M66 -262 Q76 -286 104 -278 L112 -266 Q96 -258 84 -250 Z"/>
+      <rect x="70" y="-290" width="4" height="16" rx="2"/><rect x="78" y="-292" width="4" height="16" rx="2"/>
+      <path d="M-44 -122 Q-62 -110 -60 -84" stroke="var(--sil)" stroke-width="4" fill="none"/>
+    </g>
+  </defs>
+  <g class="sunrise"><circle cx="720" cy="610" r="165" fill="url(#glow)"/><circle cx="720" cy="610" r="96" fill="var(--sun)"/></g>
+  <path d="M-3000 640 H0 Q240 590 480 625 T960 615 T1440 630 H4440 V820 H-3000Z" fill="var(--hill)"/>
+  <use href="#acacia" transform="translate(190 690) scale(1.25)"/>
+  <use href="#acacia" transform="translate(1250 680) scale(1.05)"/>
+  <use href="#acacia" transform="translate(1010 640) scale(.55)"/>
+  <use href="#giraffe" transform="translate(600 720) scale(.95)"/>
+  <use href="#giraffe" transform="translate(840 720) scale(-.95 .95)"/>
+  <path d="M-3000 700 H0 Q360 670 720 700 T1440 695 H4440 V820 H-3000Z" fill="var(--hill2)"/>
+  <path d="M-3000 760 H0 Q400 735 800 758 T1440 750 H4440 V820 H-3000Z" fill="var(--sil)"/>
+</svg>

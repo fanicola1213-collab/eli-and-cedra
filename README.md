@@ -1,27 +1,36 @@
-# Wedding website
+# Eli & Cedra
 
-A one-page wedding site for July 17, 2027 at The Haven of the Wild, Chittenango, NY.
-Hosted free on GitHub Pages. RSVPs are saved to a Google Sheet.
+Our story, photos and stories. Live at https://fanicola1213-collab.github.io/eli-and-cedra/
 
-## Files
-- `index.html`: the whole website.
-- `apps-script.gs`: the RSVP collector you paste into a Google Sheet (instructions are inside the file).
+Everything is added from the GitHub website. No coding needed.
+After each change, the live site updates in 1–2 minutes.
 
-## How the couple edits the site (no coding needed)
-1. On GitHub, open `index.html` and click the pencil icon (Edit).
-2. Scroll to the block marked **EDIT HERE** near the bottom.
-3. Change the text inside the quotes: names, story, schedule, hotels, meals, registry links, FAQ.
-   Keep the quotes and commas in place.
-4. Click **Commit changes**. The live site updates within about a minute.
+## Add photos
+1. Open the `photos` folder.
+2. Open an album folder (like `adventures`), or make a new album:
+   click **Add file → Upload files** and, before dropping the photos, type a folder name
+   in the path box, e.g. `photos/honeymoon/`. The folder name becomes the album title
+   ("honeymoon" shows as "Honeymoon"). Use lowercase and dashes, no spaces.
+3. Drag in the photos and click **Commit changes**.
 
-## Turning on RSVPs
-Follow the steps at the top of `apps-script.gs`, then paste the Web app URL into
-`rsvpEndpoint: ""` in the EDIT HERE block. Until then, the form runs in preview mode and saves nothing.
+Tips: JPG or PNG. Phone photos are large; resizing them to about 2000 pixels wide
+keeps the site fast (Claude can do this for you). Delete the `sample-…` photos once you
+have real ones.
+
+## Add a story
+1. Open the `_stories` folder and click `_TEMPLATE.md`, then copy its text.
+2. Go back to `_stories`, click **Add file → Create new file**.
+3. Name it with lowercase words and dashes, ending in `.md`, e.g. `our-new-home.md`.
+   The name becomes the story's web address.
+4. Paste the template, fill in the title, date (YYYY-MM-DD), cover photo and your text.
+5. Click **Commit changes**.
+
+Delete `how-we-met.md` and `first-trip.md` (the samples) or rewrite them.
+
+## Edit the timeline
+Open `_data/timeline.yml`, click the pencil, and edit the entries.
+Keep the spacing the same. Add new moments at the bottom.
 
 ## Privacy
-The GitHub repository is public on a free account. Never put guest lists, emails or addresses in it.
-RSVP replies go only to the Google Sheet in your Google account.
-
-## Publishing on GitHub Pages
-Repository **Settings > Pages > Build and deployment**: Source "Deploy from a branch", branch `main`, folder `/ (root)`.
-For a custom domain, add it under Settings > Pages > Custom domain and follow GitHub's DNS instructions.
+The site is public to anyone with the link, but it asks search engines not to list it.
+Don't post anything you wouldn't want shared.

@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<article class="band">
+  <div class="wrap narrow">
+    <p class="crumb"><a href="{{ '/stories/' | relative_url }}">All stories</a></p>
+    <h1 class="story-title">{{ page.title }}</h1>
+    <p class="story-date">{{ page.date | date: "%B %-d, %Y" }}</p>
+    {% if page.cover %}<img class="story-cover" src="{{ page.cover | relative_url }}" alt="">{% endif %}
+    <div class="prose">
+      {{ content }}
+    </div>
+  </div>
+</article>

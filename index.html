@@ -1,375 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Our Wedding</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
-<style>
-/* VOICE: warm, elegant, a little adventurous, like a letterpress invitation for a safari lodge.
-   IDEA: a printed safari-lodge invitation folio; each section is a card in the folio.
-   PICTURE: a layered savanna sunset with acacia trees and two giraffes whose necks bow together.
-   COLOUR and TYPE: savanna gold sky, deep ebony ink, acacia-green accent. Cormorant display, Jost body.
-   LAYOUT: full-bleed scene hero, sticky section links, centered single-column cards, schedule with hanging times. */
-:root{color-scheme:light dark;
-  --bg:light-dark(#f6efe3,#17120e);
-  --card:light-dark(#fffaf2,#221a14);
-  --ink:light-dark(#2a1f17,#f3e7d3);
-  --soft:light-dark(#6b5a49,#c7b49a);
-  --gold:light-dark(#c98f2e,#e0aa4c);
-  --acacia:light-dark(#3f4a2b,#a9b98a);
-  --line:light-dark(#e3d4bb,#3a2e24);
-  --sky1:light-dark(#f4c56b,#2b1f3a);
-  --sky2:light-dark(#e8955a,#5a3346);
-  --sky3:light-dark(#c9663f,#8a4a3a);
-  --sun:light-dark(#fff1c9,#f6dca0);
-  --hill:light-dark(#b9773f,#3b2a22);
-  --hill2:light-dark(#8e5a31,#2a1e18);
-  --sil:light-dark(#2a1f17,#0d0907);
-  --heroInk:light-dark(#2a1f17,#fbefd9)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
-*{box-sizing:border-box;min-width:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Jost,system-ui,sans-serif;overflow-x:clip}
-h1,h2,h3{font-family:Cormorant,Georgia,serif;font-weight:500;line-height:1.05;text-wrap:balance;margin:0}
-h2{font-size:clamp(34px,5vw,48px);text-align:center;margin-bottom:8px}
-h3{font-size:26px}
-p{margin:0 0 12px}
-a{color:var(--acacia)}
-.hero{display:flex;flex-direction:column;text-align:center;color:var(--heroInk);overflow:hidden;background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 70%,var(--sky3) 100%)}
-.hero-text{padding:clamp(40px,8vh,96px) 20px clamp(8px,2vh,24px)}
-.scene{display:block;width:100%;height:clamp(240px,34vw,460px);flex:none;overflow:visible}
-.kicker{font-size:15px;letter-spacing:.02em;margin-bottom:10px}
-.names{font-family:Cormorant,Georgia,serif;line-height:1.05;font-size:clamp(52px,10vw,104px);font-weight:500;font-style:italic}
-.when{font-family:Cormorant,serif;font-size:clamp(24px,3.4vw,32px);margin-top:14px}
-.where{font-size:16px;margin-top:4px}
-.count{display:flex;gap:18px;justify-content:center;margin-top:22px;flex-wrap:wrap}
-.count div{min-width:64px}.count b{display:block;font-family:Cormorant,serif;font-size:36px;font-weight:600;line-height:1}
-.count span{font-size:13px}
-nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-nav .scroll{display:flex;gap:4px;justify-content:safe center;padding:8px 12px;overflow-x:auto}
-nav a{flex:none;text-decoration:none;color:var(--ink);font-size:15px;padding:10px 14px;border-radius:999px;min-height:44px;display:flex;align-items:center}
-nav a:hover,nav a:focus-visible{background:var(--line);outline:none}
-.band{padding:clamp(40px,6vw,80px) max(5vw,16px)}
-.wrap{max-width:760px;margin:0 auto}
-.lead{text-align:center;color:var(--soft);margin-bottom:28px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:clamp(22px,4vw,40px);box-shadow:0 1px 0 var(--line)}
-.ornament{display:block;margin:0 auto 14px;width:120px;height:18px;color:var(--gold)}
-.sched{list-style:none;margin:0;padding:0}
-.sched li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
-.sched li:last-child{border-bottom:0}
-.sched .t{font-family:Cormorant,serif;font-size:26px;font-weight:600;color:var(--gold);white-space:nowrap;line-height:1.1}
-.sched .d{font-size:14px;color:var(--soft);display:block;font-family:Jost,sans-serif;font-weight:400}
-.sched h3{font-size:24px;margin-bottom:4px}
-.sched p{color:var(--soft);margin:0}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:20px}
-.facts{list-style:none;padding:0;margin:14px 0 0}
-.facts li{padding:8px 0 8px 26px;position:relative}
-.facts li::before{content:"";position:absolute;left:4px;top:17px;width:9px;height:9px;border-radius:50%;background:var(--gold)}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 22px;border-radius:999px;border:1.5px solid var(--acacia);background:var(--acacia);color:var(--bg);font:500 16px Jost,sans-serif;text-decoration:none;cursor:pointer}
-.btn.ghost{background:transparent;color:var(--acacia)}
-.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:18px}
-form{display:grid;gap:18px}
-label{display:grid;gap:6px;font-size:15px;font-weight:500}
-input,select,textarea{font:16px Jost,sans-serif;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);min-height:46px;width:100%}
-textarea{min-height:96px;resize:vertical}
-fieldset{border:0;padding:0;margin:0;display:grid;gap:8px}
-legend{font-size:15px;font-weight:500;margin-bottom:6px}
-.choice{display:flex;gap:10px;flex-wrap:wrap}
-.choice label{display:flex;align-items:center;gap:10px;font-weight:400;border:1px solid var(--line);border-radius:999px;padding:8px 18px;min-height:46px;cursor:pointer;background:var(--bg)}
-.choice input{width:20px;min-height:20px;margin:0;accent-color:var(--acacia)}
-.only-yes[hidden]{display:none}
-.msg{padding:16px 18px;border-radius:6px;background:color-mix(in srgb,var(--acacia) 14%,var(--card));border:1px solid var(--acacia)}
-.err{color:light-dark(#9b2c1c,#f29a86);font-size:14px}
-details{border-bottom:1px solid var(--line);padding:6px 0}
-summary{cursor:pointer;font-family:Cormorant,serif;font-size:23px;font-weight:600;padding:12px 0;min-height:44px;list-style-position:outside}
-details p{color:var(--soft)}
-.help{font-size:14px;color:var(--soft);margin:0;text-align:center}.help a{overflow-wrap:anywhere}
-.note{font-size:13px;color:var(--soft);text-align:center;margin-top:16px}
-footer{text-align:center;padding:48px 16px 64px;background:var(--acacia);color:var(--bg)}
-footer .names{font-size:clamp(40px,7vw,64px)}
-@media (prefers-reduced-motion:no-preference){.sunrise{animation:rise 2.4s ease-out both}@keyframes rise{from{transform:translateY(40px);opacity:.3}to{transform:none;opacity:1}}}
-@media(max-width:600px){.sched li{grid-template-columns:minmax(0,1fr);gap:4px}.count{gap:10px}}
-</style>
-</head>
-<body>
+---
+layout: default
+---
+{% assign exts = ".jpg .jpeg .png .webp .gif" %}
+{% assign photos = site.static_files | where_exp: "f", "f.path contains '/photos/'" | sort: "path" | reverse %}
+{% assign stories = site.stories | sort: "date" | reverse %}
 
-<header class="hero" aria-label="Welcome">
+<header class="hero">
   <div class="hero-text">
-    <div class="kicker">Together with their families</div>
-    <h1 class="names" id="names">Bride &amp; Groom</h1>
-    <div class="when" id="when"></div>
-    <div class="where" id="where"></div>
-    <div class="count" id="count" aria-live="off"></div>
+    <h1 class="names">{{ site.names }}</h1>
+    <p class="tagline">{{ site.tagline }}</p>
   </div>
-  <svg class="scene" viewBox="0 380 1440 440" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-    <defs>
-      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="var(--sky1)"/><stop offset=".62" stop-color="var(--sky2)"/><stop offset="1" stop-color="var(--sky3)"/>
-      </linearGradient>
-      <radialGradient id="glow"><stop offset="0" stop-color="var(--sun)" stop-opacity=".9"/><stop offset="1" stop-color="var(--sun)" stop-opacity="0"/></radialGradient>
-      <g id="acacia">
-        <path d="M-6 0 L-3 -70 Q-30 -95 -60 -100 M3 -70 Q30 -96 62 -104 M0 -70 L2 -110" stroke="var(--sil)" stroke-width="7" fill="none" stroke-linecap="round"/>
-        <ellipse cx="0" cy="-118" rx="120" ry="20" fill="var(--sil)"/>
-        <ellipse cx="-50" cy="-104" rx="62" ry="13" fill="var(--sil)"/>
-        <ellipse cx="55" cy="-108" rx="66" ry="14" fill="var(--sil)"/>
-      </g>
-      <g id="giraffe" fill="var(--sil)">
-        <ellipse cx="0" cy="-118" rx="46" ry="26"/>
-        <rect x="-36" y="-108" width="8" height="108" rx="3"/><rect x="-20" y="-104" width="8" height="104" rx="3"/>
-        <rect x="20" y="-104" width="8" height="104" rx="3"/><rect x="34" y="-108" width="8" height="108" rx="3"/>
-        <path d="M30 -130 Q58 -200 70 -262 L86 -258 Q74 -196 50 -112 Z"/>
-        <path d="M66 -262 Q76 -286 104 -278 L112 -266 Q96 -258 84 -250 Z"/>
-        <rect x="70" y="-290" width="4" height="16" rx="2"/><rect x="78" y="-292" width="4" height="16" rx="2"/>
-        <path d="M-44 -122 Q-62 -110 -60 -84" stroke="var(--sil)" stroke-width="4" fill="none"/>
-      </g>
-    </defs>
-        <g class="sunrise"><circle cx="720" cy="610" r="165" fill="url(#glow)"/><circle cx="720" cy="610" r="96" fill="var(--sun)"/></g>
-    <path d="M-3000 640 H0 Q240 590 480 625 T960 615 T1440 630 H4440 V820 H-3000Z" fill="var(--hill)"/>
-    <use href="#acacia" transform="translate(190 690) scale(1.25)"/>
-    <use href="#acacia" transform="translate(1250 680) scale(1.05)"/>
-    <use href="#acacia" transform="translate(1010 640) scale(.55)"/>
-    <use href="#giraffe" transform="translate(600 720) scale(.95)"/>
-    <use href="#giraffe" transform="translate(840 720) scale(-.95 .95)"/>
-    <path d="M-3000 700 H0 Q360 670 720 700 T1440 695 H4440 V820 H-3000Z" fill="var(--hill2)"/>
-    <path d="M-3000 760 H0 Q400 735 800 758 T1440 750 H4440 V820 H-3000Z" fill="var(--sil)"/>
-  </svg>
+  {% include scene.html %}
 </header>
 
-<nav aria-label="Sections"><div class="scroll">
-  <a href="#story">Our story</a><a href="#schedule">Schedule</a><a href="#venue">Venue</a><a href="#stay">Stay</a><a href="#rsvp">RSVP</a><a href="#registry">Registry</a><a href="#faq">FAQ</a>
-</div></nav>
+<section class="band">
+  <div class="wrap">
+    <div class="head-row"><h2>Latest stories</h2><a class="more" href="{{ '/stories/' | relative_url }}">All stories</a></div>
+    <div class="cards">
+      {% for s in stories limit: 3 %}
+      <a class="card" href="{{ s.url | relative_url }}">
+        {% if s.cover %}<img src="{{ s.cover | relative_url }}" alt="" loading="lazy">{% endif %}
+        <div class="card-body">
+          <span class="card-date">{{ s.date | date: "%B %Y" }}</span>
+          <h3>{{ s.title }}</h3>
+          {% if s.summary %}<p>{{ s.summary }}</p>{% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% if stories.size == 0 %}<p class="empty">Stories are on their way.</p>{% endif %}
+  </div>
+</section>
 
-<main>
-<section class="band" id="story"><div class="wrap">
-  <svg class="ornament" viewBox="0 0 120 18" aria-hidden="true"><path d="M0 9h46M74 9h46" stroke="currentColor"/><path d="M60 2l7 7-7 7-7-7z" fill="currentColor"/></svg>
-  <h2>Our story</h2>
-  <p class="lead">How it all began</p>
-  <div class="card" id="storyText"></div>
-</div></section>
-
-<section class="band" id="schedule" style="background:var(--card)"><div class="wrap">
-  <h2>The weekend</h2>
-  <p class="lead">Times are local (Eastern). Details may be updated as the day approaches.</p>
-  <ul class="sched" id="sched"></ul>
-</div></section>
-
-<section class="band" id="venue"><div class="wrap">
-  <h2>The venue</h2>
-  <p class="lead" id="venueLine"></p>
-  <div class="card">
-    <h3 id="venueName"></h3>
-    <p id="venueAddr"></p>
-    <p>The Haven is set on an African-inspired savanna in Central New York. Expect a 14,000-square-foot event space with an indoor ceremony hall, an outdoor patio overlooking the savanna, and views of the resident giraffes, zebras and wildebeest.</p>
-    <ul class="facts">
-      <li>Indoor ceremony hall, so we're covered whatever the weather</li>
-      <li>Cocktails on the patio with savanna views</li>
-      <li>Giraffe-view backdrops for photos</li>
-      <li>A giraffe feeding experience is offered through the venue</li>
-    </ul>
-    <div class="btns">
-      <a class="btn" id="mapLink" href="#" target="_blank" rel="noopener">Open in Maps</a>
-      <a class="btn ghost" href="https://thehavenofthewild.com/" target="_blank" rel="noopener">Venue website</a>
+<section class="band tint">
+  <div class="wrap">
+    <div class="head-row"><h2>Photos</h2><a class="more" href="{{ '/photos/' | relative_url }}">All albums</a></div>
+    <div class="strip">
+      {% assign shown = 0 %}
+      {% for f in photos %}{% assign ext = f.extname | downcase %}{% if exts contains ext and shown < 8 %}
+        <a href="{{ '/photos/' | relative_url }}"><img src="{{ f.path | relative_url }}" alt="" loading="lazy"></a>
+        {% assign shown = shown | plus: 1 %}
+      {% endif %}{% endfor %}
     </div>
   </div>
-</div></section>
+</section>
 
-<section class="band" id="stay" style="background:var(--card)"><div class="wrap">
-  <h2>Travel &amp; stay</h2>
-  <p class="lead">Chittenango is in Central New York, east of Syracuse.</p>
-  <div class="grid2">
-    <div class="card"><h3>On-site safari tents</h3><p>The Haven has luxury safari tents beside the venue, so you can stay right where the party is. Availability is limited; we'll share booking details here.</p></div>
-    <div class="card"><h3>Hotels nearby</h3><p id="hotelText"></p></div>
-    <div class="card"><h3>Getting here</h3><p>Syracuse Hancock International Airport (SYR) is the nearest major airport. Renting a car is the easiest way to reach the venue.</p></div>
+<section class="band">
+  <div class="wrap narrow center">
+    <h2>Our story so far</h2>
+    <p class="lead">The moments that brought us here, in order.</p>
+    <a class="btn" href="{{ '/our-story/' | relative_url }}">Read our timeline</a>
   </div>
-</div></section>
-
-<section class="band" id="rsvp"><div class="wrap">
-  <h2>RSVP</h2>
-  <p class="lead" id="rsvpBy"></p>
-  <div class="card">
-    <form id="rsvpForm" novalidate>
-      <label>Full name<input id="f-name" name="name" autocomplete="name" required></label>
-      <label>Email<input id="f-email" name="email" type="email" autocomplete="email" required></label>
-      <fieldset><legend>Will you be joining us?</legend>
-        <div class="choice">
-          <label><input type="radio" name="attending" value="yes" required> Joyfully accepts</label>
-          <label><input type="radio" name="attending" value="no"> Regretfully declines</label>
-        </div>
-      </fieldset>
-      <div class="only-yes" id="yesFields" hidden>
-        <div style="display:grid;gap:18px">
-          <label>Number in your party (including you)<select id="f-count" name="partySize"></select></label>
-          <label>Guest names<input id="f-guests" name="guestNames" placeholder="Names of everyone in your party"></label>
-          <label>Meal preference<select id="f-meal" name="meal"></select></label>
-          <label>Dietary needs or allergies<input id="f-diet" name="dietary"></label>
-          <fieldset><legend>Interested in the giraffe feeding experience?</legend>
-            <div class="choice">
-              <label><input type="radio" name="giraffe" value="yes"> Yes, please</label>
-              <label><input type="radio" name="giraffe" value="no"> Maybe not</label>
-            </div>
-          </fieldset>
-          <label>A song that will get you dancing<input id="f-song" name="song"></label>
-        </div>
-      </div>
-      <label>A note for the couple<textarea id="f-note" name="note"></textarea></label>
-      <p class="err" id="formErr" role="alert"></p>
-      <button class="btn" type="submit" id="submitBtn">Send RSVP</button>
-      <p class="help" id="rsvpHelp"></p>
-    </form>
-    <div class="msg" id="thanks" hidden tabindex="-1"></div>
-  </div>
-</div></section>
-
-<section class="band" id="registry" style="background:var(--card)"><div class="wrap" style="text-align:center">
-  <h2>Registry</h2>
-  <p class="lead">Your presence is the greatest gift. For those who have asked, we've registered here:</p>
-  <div class="btns" id="regBtns"></div>
-</div></section>
-
-<section class="band" id="faq"><div class="wrap">
-  <h2>Questions</h2>
-  <p class="lead" id="faqLead">Can't find an answer? Reach out to us anytime.</p>
-  <div class="card" id="faqList"></div>
-  <p class="note">Names, story, times and answers on this page are placeholders until the couple fills them in.</p>
-</div></section>
-</main>
-
-<footer>
-  <div class="names" id="footNames">Bride &amp; Groom</div>
-  <p id="footDate" style="margin-top:8px"></p>
-</footer>
-
-<script>
-{
-/* ================================================================
-   EDIT HERE. Everything on the page comes from this block.
-   Change the text between the quotes, save, and the site updates.
-   ================================================================ */
-const CONFIG = {
-  partner1: "Bride",
-  partner2: "Groom",
-  dateISO: "2027-07-17T16:00:00-04:00",   // ceremony start, Eastern time
-  dateText: "Saturday, July 17, 2027",
-  venueName: "The Haven of the Wild",
-  venueAddress: "1875 New Boston Rd, Chittenango, NY 13037",
-  story: [
-    "This is where your story goes: how you met, the first date, the moment you knew.",
-    "Add a second paragraph about the proposal, or anything you'd like guests to know about the two of you."
-  ],
-  schedule: [
-    { day: "Fri, Jul 16", time: "7:00 pm", title: "Welcome gathering", text: "Drinks and a casual hello for anyone arriving early. Location to come." },
-    { day: "Sat, Jul 17", time: "4:00 pm", title: "Ceremony", text: "In the ceremony hall at The Haven. Please arrive 20 minutes early." },
-    { day: "Sat, Jul 17", time: "5:00 pm", title: "Cocktail hour", text: "On the patio, overlooking the savanna." },
-    { day: "Sat, Jul 17", time: "6:00 pm", title: "Dinner & dancing", text: "Reception to follow in the main hall." },
-    { day: "Sun, Jul 18", time: "10:00 am", title: "Farewell brunch", text: "One last toast before everyone heads home. Details to come." }
-  ],
-  hotels: "We're arranging hotel room blocks and will post the details and booking links here.",
-  rsvpDeadline: "June 1, 2027",
-  contactEmail: "eliandcedra2027@gmail.com",   // shown under the RSVP form and in Questions
-  maxPartySize: 4,
-  meals: ["Beef", "Chicken", "Fish", "Vegetarian", "Children's meal"],
-  // Add one line per registry or fund, e.g. { label: "Honeymoon fund", url: "https://..." }
-  // Leave the list empty to show "Registry details coming soon."
-  registry: [],
-  faq: [
-    { q: "What should I wear?", a: "Dress code to come. Garden or cocktail attire is typical for a summer evening here." },
-    { q: "Are children invited?", a: "We'll update this once the guest list is final." },
-    { q: "Will we see the animals?", a: "Yes. The venue overlooks the savanna, where giraffes, zebras and wildebeest roam. Animal experiences are arranged through the venue." },
-    { q: "Is there parking?", a: "Parking details will be posted here." },
-    { q: "When do I need to RSVP?", a: "Please RSVP by June 1, 2027 using the form above." }
-  ],
-  // Paste your Google Apps Script web-app URL here to collect RSVPs in a Google Sheet (see README).
-  rsvpEndpoint: ""
-};
-/* ================================ end of editable block ================================ */
-
-const $ = id => document.getElementById(id);
-const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const safeUrl = u => /^https:\/\//.test(u) ? u : "#";
-const couple = CONFIG.partner1 + " & " + CONFIG.partner2;
-
-document.title = couple + " · Wedding";
-$("names").textContent = couple;
-$("footNames").textContent = couple;
-$("when").textContent = CONFIG.dateText;
-$("where").textContent = CONFIG.venueName + " · Chittenango, New York";
-$("footDate").textContent = CONFIG.dateText + " · " + CONFIG.venueName;
-$("storyText").innerHTML = CONFIG.story.map(p => "<p>" + esc(p) + "</p>").join("");
-$("sched").innerHTML = CONFIG.schedule.map(s =>
-  `<li><div class="t">${esc(s.time)}<span class="d">${esc(s.day)}</span></div><div><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div></li>`).join("");
-$("venueLine").textContent = "Where elegance meets the wild";
-$("venueName").textContent = CONFIG.venueName;
-$("venueAddr").textContent = CONFIG.venueAddress;
-$("mapLink").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.venueName + ", " + CONFIG.venueAddress);
-$("hotelText").textContent = CONFIG.hotels;
-$("rsvpBy").textContent = "Kindly reply by " + CONFIG.rsvpDeadline;
-const regs = CONFIG.registry.filter(r => /^https:\/\//.test(r.url));
-$("regBtns").innerHTML = regs.length
-  ? regs.map(r => `<a class="btn ghost" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.label)}</a>`).join("")
-  : `<p style="color:var(--soft);margin:0">Registry details coming soon.</p>`;
-$("faqList").innerHTML = CONFIG.faq.map(f => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
-$("f-count").innerHTML = Array.from({length: CONFIG.maxPartySize}, (_, i) => `<option>${i + 1}</option>`).join("");
-$("f-meal").innerHTML = CONFIG.meals.map(m => `<option>${esc(m)}</option>`).join("");
-
-// Contact email
-const mail = CONFIG.contactEmail;
-const mailLink = () => { const a = document.createElement("a"); a.href = "mailto:" + mail; a.textContent = mail; return a; };
-if (mail) {
-  const h = $("rsvpHelp"); h.append("Trouble submitting? Email ", mailLink(), " and we'll add you.");
-  const f = $("faqLead"); f.textContent = "Can't find an answer? Email "; f.append(mailLink(), ".");
-}
-
-// Scene: zoom to fill on narrow screens (crops only the sides); show the whole scene on wide ones (never crops the giraffes).
-const scene = document.querySelector(".scene");
-const fit = () => { const r = scene.getBoundingClientRect(); scene.setAttribute("preserveAspectRatio", r.width / r.height <= 1440 / 440 ? "xMidYMax slice" : "xMidYMax meet"); };
-fit(); const sceneObs = new ResizeObserver(fit); sceneObs.observe(scene);
-
-// Countdown
-const target = new Date(CONFIG.dateISO).getTime();
-const tick = () => {
-  const ms = Math.max(0, target - Date.now());
-  const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
-  $("count").innerHTML = ms === 0 ? "<div><b>Today</b><span>is the day</span></div>" :
-    [[d, "days"], [h, "hours"], [m, "minutes"]].map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join("");
-};
-tick(); const timer = setInterval(tick, 30000);
-
-// RSVP
-const form = $("rsvpForm");
-form.addEventListener("change", e => {
-  if (e.target.name === "attending") $("yesFields").hidden = e.target.value !== "yes";
-});
-form.addEventListener("submit", async e => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(form).entries());
-  const err = $("formErr");
-  if (!data.name || !data.name.trim()) { err.textContent = "Please enter your name."; $("f-name").focus(); return; }
-  if (!/^\S+@\S+\.\S+$/.test(data.email || "")) { err.textContent = "Please enter a valid email."; $("f-email").focus(); return; }
-  if (!data.attending) { err.textContent = "Please let us know if you can come."; return; }
-  err.textContent = "";
-  const btn = $("submitBtn"); btn.disabled = true; btn.textContent = "Sending…";
-  let sent = false;
-  if (CONFIG.rsvpEndpoint) {
-    try {
-      await fetch(CONFIG.rsvpEndpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(data) });
-      sent = true;
-    } catch (x) {
-      err.textContent = "Something went wrong sending your RSVP. Please try again, or email " + (mail || "us") + ".";
-      btn.disabled = false; btn.textContent = "Send RSVP"; return;
-    }
-  }
-  form.hidden = true;
-  const t = $("thanks");
-  t.textContent = sent
-    ? (data.attending === "yes" ? `Thank you, ${data.name.trim()}! We can't wait to celebrate with you.` : `Thank you, ${data.name.trim()}. We'll miss you and appreciate you letting us know.`)
-    : "Preview mode: RSVPs aren't being collected yet. Once the Google Sheet link is added, replies will be saved there.";
-  t.hidden = false; t.focus();
-});
-}
-</script>
-</body>
-</html>
+</section>

@@ -1,0 +1,27 @@
+# Site settings. Most people never need to touch this file.
+title: "Eli & Cedra"
+tagline: "Our story, one chapter at a time"
+names: "Eli & Cedra"
+
+# The part of the web address after .github.io (change if the repository is renamed)
+baseurl: "/eli-and-cedra"
+
+markdown: kramdown
+timezone: America/New_York
+
+collections:
+  stories:
+    output: true
+    permalink: /stories/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: stories
+    values:
+      layout: story
+
+exclude:
+  - README.md
+  - HOW-TO-ADD.md
+  - _stories/_TEMPLATE.md

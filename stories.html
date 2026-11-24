@@ -1,0 +1,26 @@
+---
+layout: default
+title: Stories
+nav: stories
+permalink: /stories/
+---
+{% assign stories = site.stories | sort: "date" | reverse %}
+<section class="band">
+  <div class="wrap">
+    <h1 class="page-title">Stories</h1>
+    <p class="lead center">Trips, milestones and the little moments in between.</p>
+    <div class="cards">
+      {% for s in stories %}
+      <a class="card" href="{{ s.url | relative_url }}">
+        {% if s.cover %}<img src="{{ s.cover | relative_url }}" alt="" loading="lazy">{% endif %}
+        <div class="card-body">
+          <span class="card-date">{{ s.date | date: "%B %Y" }}</span>
+          <h3>{{ s.title }}</h3>
+          {% if s.summary %}<p>{{ s.summary }}</p>{% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% if stories.size == 0 %}<p class="empty">Stories are on their way.</p>{% endif %}
+  </div>
+</section>
